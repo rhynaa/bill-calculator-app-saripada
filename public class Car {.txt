@@ -1,0 +1,46 @@
+public class Car {
+    private String make = "Chevrolet";   // attributes
+    private String model = "Corvette";   // attributes - fixed spelling
+    private int year = 2020;             // attributes
+    private String color = "Blue";       // attributes
+    private double price = 50000.00;     // attributes
+    
+    public void drive() {
+        System.out.println("You drive the car");  // method
+    }
+    
+    public void brake() {
+        System.out.println("You step on the brakes");  // method
+    }
+
+    public String getMake() {
+        return make;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Car myCar = new Car();
+        System.out.println(myCar.getMake());
+        System.out.println(myCar.getModel());
+        System.out.println(myCar.getYear());
+        System.out.println(myCar.getColor());
+        System.out.println(myCar.getPrice());
+    }
+}

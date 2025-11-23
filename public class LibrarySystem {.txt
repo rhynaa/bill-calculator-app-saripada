@@ -1,0 +1,112 @@
+public class LibrarySystem {
+    public static void main(String[] args) {
+
+        // Create an array of LibraryItem objects
+        LibraryItem[] items = new LibraryItem[3];
+
+        // Add Book and Magazine objects
+        items[0] = new Book("The Lord of the Rings", "J.R.R. Tolkien", true);
+        items[1] = new Magazine("National Geographic", "Various", 152, true);
+        items[2] = new Book("To Kill a Mockingbird", "Harper Lee", true);
+
+        System.out.println("--- Borrowing items ---");
+        for (LibraryItem item : items) {
+            item.borrow();
+            System.out.println();
+        }
+    }
+}
+
+// ===== Abstract class =====
+abstract class LibraryItem {
+    private String title;
+    private String author;
+    private boolean available;
+
+    public LibraryItem(String title, String author, boolean available) {
+        this.title = title;
+        this.author = author;
+        this.available = available;
+    }
+
+    // Getters and setters
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
+
+    // Abstract methods
+    public abstract void borrow();
+    public abstract void returnItem();
+}
+
+// ===== Book subclass =====
+class Book extends LibraryItem {
+
+    public Book(String title, String author, boolean available) {
+        super(title, author, available);
+    }
+
+    @Override
+    public void borrow() {
+        System.out.println("You are borrowing the book: " + getTitle() + " by " + getAuthor());
+        System.out.println("Rule: Books can be borrowed for 14 days.");
+        setAvailable(false);
+    }
+
+    @Override
+    public void returnItem() {
+        System.out.println("Returning the book: " + getTitle());
+        setAvailable(true);
+    }
+}
+
+// ===== Magazine subclass =====
+class Magazine extends LibraryItem {
+    private int issueNumber;
+
+    public Magazine(String title, String author, int issueNumber, boolean available) {
+        super(title, author, available);
+        this.issueNumber = issueNumber;
+    }
+
+    public int getIssueNumber() {
+        return issueNumber;
+    }
+
+    public void setIssueNumber(int issueNumber) {
+        this.issueNumber = issueNumber;
+    }
+
+    @Override
+    public void borrow() {
+        System.out.println("You are borrowing the magazine: " + getTitle() + " Issue #" + issueNumber);
+        System.out.println("Rule: Magazines can be borrowed for 7 days.");
+        setAvailable(false);
+    }
+
+    @Override
+    public void returnItem() {
+        System.out.println("Returning the magazine: " + getTitle() + " Issue #" + issueNumber);
+        setAvailable(true);
+    }
+}

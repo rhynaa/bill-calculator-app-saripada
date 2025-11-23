@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Electric Bill Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    h1, h2 {
+      color: #333;
+    }
+
+    input[type="number"] {
+      width: 100px;
+      padding: 5px;
+    }
+
+    button {
+      padding: 5px 10px;
+      margin-left: 5px;
+      cursor: pointer;
+    }
+
+    #monthlyTable {
+      border-collapse: collapse;
+      width: 60%;
+      margin-top: 20px;
+    }
+
+    #monthlyTable th, #monthlyTable td {
+      border: 1px solid #000;
+      padding: 5px 10px;
+      text-align: left;
+    }
+
+    #monthlyTable th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <h1>Electric Bill Calculator</h1>
+
+  <label>Month:</label>
+  <input type="text" id="month" placeholder="e.g. January"><br><br>
+
+  <label>Units Consumed:</label>
+  <input type="number" id="units" placeholder="e.g. 100"><br><br>
+
+  <label>Rate per Unit:</label>
+  <input type="number" id="rate" placeholder="e.g. 15"><br><br>
+
+  <button onclick="calculateBill()">Calculate Bill</button>
+
+  <h2>Bill Result:</h2>
+  <p id="result">No calculation yet.</p>
+
+  <h2>Monthly Record Table</h2>
+  <table id="monthlyTable">
+    <tr>
+      <th>Month</th>
+      <th>Units</th>
+      <th>Rate per Unit</th>
+      <th>Total Bill</th>
+    </tr>
+  </table>
+
+  <script>
+    // Array to store monthly records
+    const monthlyRecords = [];
+
+    function calculateBill() {
+      const month = document.getElementById("month").value.trim();
+      const units = parseFloat(document.getElementById("units").value);
+      const rate = parseFloat(document.getElementById("rate").value);
+
+      if (!month || isNaN(units) || isNaN(rate)) {
+        alert("Please enter valid month, units, and rate.");
+        return;
+      }
+
+      const total = units * rate;
+
+      // Show result
+      document.getElementById("result").innerText = `Total bill for ${month}: ₱${total}`;
+
+      // Add to monthly records
+      monthlyRecords.push({ month, units, rate, total });
+
+      // Update table
+      updateTable();
+    }
+
+    function updateTable() {
+      const table = document.getElementById("monthlyTable");
+
+      // Remove all rows except the header
+      table.innerHTML = `
+        <tr>
+          <th>Month</th>
+          <th>Units</th>
+          <th>Rate per Unit</th>
+          <th>Total Bill</th>
+        </tr>
+      `;
+
+      // Add all records
+      monthlyRecords.forEach(record => {
+        const row = table.insertRow();
+        row.insertCell(0).innerText = record.month;
+        row.insertCell(1).innerText = record.units;
+        row.insertCell(2).innerText = record.rate;
+        row.insertCell(3).innerText = record.total;
+      });
+    }
+  </script>
+</body>
+</html>
+

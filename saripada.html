@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Weekly Expense Calculator</title>
+        <style>
+            body {
+
+                 font-family: Arial, sans-serif;
+                background: #f4f6fb;
+                margin: 0;
+                padding: 0;
+            }
+            h1 {
+                text-align: center;
+                margin-top: 40px;
+                color: #2d3e50;
+            }
+            form {
+                background: #fff;
+                max-width: 350px;
+                margin: 40px auto;
+                padding: 30px 25px;
+                border-radius: 10px;
+                box-shadow: 0 2px 8px rgba(44, 62, 80, 0.1);
+            }
+            label {
+                display: block;
+                margin-bottom: 8px;
+                color: #34495e;
+                font-weight: bold;
+            }
+            input[type="number"] {
+                width: 100%;
+                padding: 8px;
+                margin-bottom: 18px;
+                border: 1px solid #bdc3c7;
+                border-radius: 5px;
+                font-size: 16px;
+            }
+            button {
+                width: 100%;
+                padding: 10px;
+                background: #2980b9;
+                color: #fff;
+                border: none;
+                border-radius: 5px;
+                font-size: 16px;
+                cursor: pointer;
+                transition: background 0.2s;
+            }
+            button:hover {
+                background: #3498db;
+            }
+            #result {
+                max-width: 350px;
+                margin: 20px auto;
+                padding: 15px;
+                background: #eaf6ff;
+                border-radius: 8px;
+                text-align: center;
+                font-size: 18px;
+                color: #2d3e50;
+                box-shadow: 0 1px 4px rgba(44, 62, 80, 0.08);
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Weekly Expense Calculator</h1>
+
+        <form onsubmit="event.preventDefault();">
+            <label>Initial Cash</label>
+            <input id="InitialCash"/><br />
+
+            <label>Day 1:</label>
+            <input id="day_one" type="number" />
+
+            <label>Day 2:</label>
+            <input id="day_two" type="number" />
+
+            <label>Day 3:</label>
+            <input id="day_three" type="number" />
+
+            <br />
+            <button id="btn_calculate">Calculate</button>
+        </form>
+
+        <div id="result"></div>
+
+        <script>
+            btn_calculate.addEventListener("click", function () {
+                let initial_cash =
+                    document.getElementById("Initial_Cash");
+                let day_one = document.getElementById("day_one");
+                let day_two = document.getElementById("day_two");
+                let day_three = document.getElementById("day_three");
+                let result = document.getElementById("result");
+                let result_value = initial_cash.value - day_one.value - day_two.value - day_three.value;
+                result.innerHTML = `result: ₱ ${result_value.toFixed(
+                    2
+                )}`;
+            });
+        </script>
+    </body>
+</html>
